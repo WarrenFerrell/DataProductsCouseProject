@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PCA Compression Application</title>
+  <meta charset="utf-8">
+  <meta name="description" content="PCA Compression Application">
+  <meta name="author" content="Warren Ferrell">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>PCA Compression Application</h1>
+    <h2>Pitch for internet dollars</h2>
+    <p>Warren Ferrell<br/>Student of Coursera Data Science Specialization</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>What is PCA Decomposition</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Any \(m x n\) matrix can be decomposed into three matricies.
+\[ X = UDV^T \]</li>
+<li>where \(U\) is a \(m x n\) matrix with orthogonal columns, \(D\) is a diagnol \(m x n\) matrix, and \(V\) is a \(n x n\) matrix with orthogonal columns.</li>
+<li>Because of the result of matrix multiplication ( an \(a x b\) matrix times a \(b x c\) matrix results in a \(a x b\) matrix) a subset of the cols of \(U\), \(D\), and \(V\)  still result in a \(m x n\) matrix </li>
+<li>If \(U\), \(D\), and \(V\) are generated correctly then the first columns of each explain progressively more of the variation in the matrix \(X\).</li>
+<li>This means that a subset of each matrix \(U\), \(D\), \(V\) can be stored and still be used to reproduce the variation represented by \(X\).</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>How this relates to Image Compression</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Raster graphics images are represented by the color (RGB and sometimes alpha) of each individual pixel. Which means every raster image is a set of 3 or 4 \(m x n\) matricies and can be decomposed into \(U\), \(D\), and \(V\) matricies.</li>
+<li>A \(m x n\) resolution picture with alpha naively requires \(4 * (m * n)\) bytes to store.</li>
+<li>A subset of size \(c\) from the PCA decomposition takes \(4 * c * (m + 1 + n)\) bytes.</li>
+</ul>
+
+<p><img src="assets/fig/picture-1.png" alt="plot of chunk picture"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>What does it look like</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>A \(602 x 480\) image ( seen on last slide) with alpha then takes 1.102 MB to store naively.</li>
+<li>The compressed images from taking only 25 singular vectors requires
+.103 MB but maintains the primary character of the image.</li>
+</ul>
+
+<p><img src="assets/fig/compressed-1.png" alt="plot of chunk compressed"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Turing it into an App and other thoughts</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li><p>I have created an interactive application in shiny that allows the user 
+to view an uncompressed image and choose how many singular vectors to include 
+then prints the compressed image.</p></li>
+<li><p>The application does not currently support dynamic image swapping but it can be
+extended to do so very easily (was not included due to danger of overusage of bandwidth).</p></li>
+<li><p>The application currently only works with PNG images but extending it to jpeg and 
+GIF (other popular raster formats) would just require a few more lines of code.</p></li>
+<li><p>Loseless compression algorithms exist and are generally preferred over PCA is almost all situations 
+(the image used in the slide actually only requires .312 MB to store as a PNG).</p></li>
+<li><p>PCA is a good way to show some basic linear algebra tricks and how one might start
+thinking about how they can compress files on a computer.</p></li>
+<li><p>Application: &quot;<a href="http://warrenferrell.shinyapps.io/DevelopingDataApplicationsCourseProject/">http://warrenferrell.shinyapps.io/DevelopingDataApplicationsCourseProject/</a>&quot;</p></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='What is PCA Decomposition'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='How this relates to Image Compression'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='What does it look like'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Turing it into an App and other thoughts'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- MathJax: Fall back to local if CDN offline but local image fonts are not supported (saves >100MB) -->
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        processEscapes: true
+      }
+    });
+  </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <!-- <script src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script> -->
+  <script>window.MathJax || document.write('<script type="text/x-mathjax-config">MathJax.Hub.Config({"HTML-CSS":{imageFont:null}});<\/script><script src="libraries/widgets/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"><\/script>')
+</script>
+<!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
