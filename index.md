@@ -29,17 +29,17 @@ $$ X = UDV^T $$
 - A $m x n$ resolution picture with alpha naively requires $4 * (m * n)$ bytes to store.
 - A subset of size $c$ from the PCA decomposition takes $4 * c * (m + 1 + n)$ bytes.
 
-![plot of chunk picture](assets/fig/picture-1.png)
+![plot of chunk picture](figure/picture-1.png)
 
 --- 
 
 
 ## What does it look like
-- A $602 x 480$ image ( seen on last slide) with alpha then takes 1.102 MB to store naively.
+- A $602 x 480$ pixel image ( seen on last slide) with alpha then takes 1.102 MB to store naively.
 - The compressed images from taking only 25 singular vectors requires
 .103 MB but maintains the primary character of the image.
 
-![plot of chunk compressed](assets/fig/compressed-1.png)
+![plot of chunk compressed](figure/compressed-1.png)
 
 
 ---
